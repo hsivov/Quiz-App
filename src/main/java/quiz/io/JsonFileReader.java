@@ -1,9 +1,9 @@
-package io;
+package quiz.io;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import entity.Question;
-import repository.Repository;
+import quiz.entity.Question;
+import quiz.repository.Repository;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,5 +1,7 @@
-import core.Engine;
-import core.EngineImpl;
+package quiz;
+
+import quiz.core.Engine;
+import quiz.core.EngineImpl;
 
 public class Main {
 

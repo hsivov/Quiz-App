@@ -1,4 +1,4 @@
-package core;
+package quiz.core;
 
 public interface Engine extends Runnable {
 

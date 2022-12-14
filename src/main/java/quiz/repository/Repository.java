@@ -1,6 +1,6 @@
-package repository;
+package quiz.repository;
 
-import entity.Question;
+import quiz.entity.Question;
 
 import java.util.Map;
 

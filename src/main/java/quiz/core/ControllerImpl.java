@@ -1,10 +1,10 @@
-package core;
+package quiz.core;
 
-import entity.Question;
-import io.JsonFileReader;
-import io.JsonFileWriter;
-import repository.QuestionRepository;
-import repository.Repository;
+import quiz.entity.Question;
+import quiz.io.JsonFileReader;
+import quiz.io.JsonFileWriter;
+import quiz.repository.QuestionRepository;
+import quiz.repository.Repository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,15 +66,17 @@ public class ControllerImpl implements Controller {
     }
 
     private void loadDataToRepository() throws IOException {
-        jsonFileReader = new JsonFileReader("main/io/quizData.json", repository);
+        jsonFileReader = new JsonFileReader("src/main/java/quiz/io/quizData.json", repository);
 
         jsonFileReader.readData();
     }
 
     @Override
     public void exit() throws IOException {
-        jsonFileWriter = new JsonFileWriter("main/io/quizData.json", repository);
+        jsonFileWriter = new JsonFileWriter("src/main/java/quiz/io/quizData.json", repository);
 
-        jsonFileWriter.writeData();
+        if (repository.getSize() != 0) {
+            jsonFileWriter.writeData();
+        }
     }
 }

@@ -1,4 +1,4 @@
-package core;
+package quiz.core;
 
 import java.io.IOException;
 

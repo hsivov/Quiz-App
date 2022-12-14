@@ -1,4 +1,4 @@
-package entity;
+package quiz.entity;
 
 public class Question {
 

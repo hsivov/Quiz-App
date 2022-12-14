@@ -1,7 +1,7 @@
-package io;
+package quiz.io;
 
 import com.google.gson.Gson;
-import repository.Repository;
+import quiz.repository.Repository;
 
 import java.io.IOException;
 import java.io.Writer;

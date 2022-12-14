@@ -1,4 +1,4 @@
-package core;
+package quiz.core;
 
 public class Printer {
 
