@@ -1,8 +1,6 @@
-package com.sivov.test.entity;
+package entity;
 
-import java.io.Serializable;
-
-public class Question implements Serializable{
+public class Question {
 
     private final String question;
     private final String a;
@@ -50,10 +48,10 @@ public class Question implements Serializable{
         return System.lineSeparator() + getQuestion() +
                 System.lineSeparator() +
                 System.lineSeparator() +
-                getA() + System.lineSeparator() +
-                getB() + System.lineSeparator() +
-                getC() + System.lineSeparator() +
-                getD() + System.lineSeparator() +
+                "a: " + getA() + System.lineSeparator() +
+                "b: " + getB() + System.lineSeparator() +
+                "c: " + getC() + System.lineSeparator() +
+                "d: " + getD() + System.lineSeparator() +
                 System.lineSeparator() +
                 "Enter your answer: ";
     }

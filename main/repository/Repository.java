@@ -1,12 +1,13 @@
-package com.sivov.test.repository;
+package repository;
 
-import com.sivov.test.entity.Question;
+import entity.Question;
 
-import java.util.Collection;
+import java.util.Map;
 
 public interface Repository {
 
-    void addQuestion(Question question);
+    void addQuestion(int idNumber, Question question);
 
-    Collection<Question> getRepository();
+    Map<Integer, Question> getRepository();
+    int getSize();
 }

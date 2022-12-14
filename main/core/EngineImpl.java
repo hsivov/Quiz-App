@@ -1,4 +1,4 @@
-package com.sivov.test.core;
+package core;
 
 import java.io.BufferedReader;
 import java.io.IOException;

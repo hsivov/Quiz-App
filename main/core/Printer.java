@@ -1,4 +1,4 @@
-package com.sivov.test.core;
+package core;
 
 public class Printer {
 
