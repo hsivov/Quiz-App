@@ -3,6 +3,7 @@ package quiz.io;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import quiz.entity.Question;
+import quiz.repository.QuestionRepository;
 import quiz.repository.Repository;
 
 import java.io.*;
@@ -12,16 +13,15 @@ import java.util.Map;
 
 public class JsonFileReader {
 
-    private final String filePath;
     private Repository repository;
 
-    public JsonFileReader(String filePath, Repository repository) {
-        this.filePath = filePath;
-        this.repository = repository;
+    public JsonFileReader() {
+        this.repository = new QuestionRepository();
     }
 
-    public void readData() throws IOException {
+    public Repository readData() throws IOException {
         Gson gson = new Gson();
+        String filePath = "src/main/java/quiz/io/quizData.json";
 
         Reader reader = Files.newBufferedReader(Paths.get(filePath));
 
@@ -36,5 +36,6 @@ public class JsonFileReader {
         }
 
         reader.close();
+        return repository;
     }
 }

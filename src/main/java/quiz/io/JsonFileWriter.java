@@ -10,17 +10,16 @@ import java.nio.file.Paths;
 
 public class JsonFileWriter {
 
-    private final String filePath;
     private Repository repository;
 
-    public JsonFileWriter(String filePath, Repository repository) {
-        this.filePath = filePath;
+    public JsonFileWriter(Repository repository) {
         this.repository = repository;
     }
 
     public void writeData() throws IOException {
 
         Gson gson = new Gson();
+        String filePath = "src/main/java/quiz/io/quizData.json";
 
         Writer writer = Files.newBufferedWriter(Paths.get(filePath));
 
