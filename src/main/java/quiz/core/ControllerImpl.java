@@ -39,26 +39,16 @@ public class ControllerImpl implements Controller {
                 correctAnswers++;
             }
         }
-        Printer.printResult(correctAnswers, repository.getRepository().size());
+        Printer.printResult(correctAnswers, repository.getSize());
     }
 
     @Override
     public void addNewQuestion() throws IOException {
-        System.out.println("Enter question:");
-        String text = reader.readLine();
-        System.out.println("Write answer A:");
-        String a = reader.readLine();
-        System.out.println("Write answer B:");
-        String b = reader.readLine();
-        System.out.println("Write answer C:");
-        String c = reader.readLine();
-        System.out.println("Write answer D:");
-        String d = reader.readLine();
-        System.out.println("Enter right answer:");
-        String rightAnswer = reader.readLine();
 
         repository = jsonFileReader.readData();
-        Question question = new Question(text, a, b, c, d, rightAnswer);
+
+        Question question = populateQuestionTemplate();
+
         repository.addQuestion(repository.getSize() + 1, question);
         System.out.println("Question successfully added to repository.");
     }
@@ -70,5 +60,58 @@ public class ControllerImpl implements Controller {
         if (repository != null) {
             jsonFileWriter.writeData();
         }
+    }
+
+    private Question populateQuestionTemplate() throws IOException {
+        String text = "";
+        while (text.isBlank()) {
+            System.out.println("Enter question:");
+            text = reader.readLine();
+            if (text.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+        String a = "";
+        while (a.isBlank()) {
+            System.out.println("Write answer A:");
+            a = reader.readLine();
+            if (a.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+        String b = "";
+        while (b.isBlank()) {
+            System.out.println("Write answer B:");
+            b = reader.readLine();
+            if (b.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+        String c = "";
+        while (c.isBlank()) {
+            System.out.println("Write answer C:");
+            c = reader.readLine();
+            if (c.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+        String d = "";
+        while (d.isBlank()) {
+            System.out.println("Write answer D:");
+            d = reader.readLine();
+            if (d.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+        String rightAnswer = "";
+        while (rightAnswer.isBlank()) {
+            System.out.println("Enter right answer:");
+            rightAnswer = reader.readLine();
+            if (rightAnswer.isBlank()) {
+                System.out.println("Field cannot be blank!");
+            }
+        }
+
+        return new Question(text, a, b, c, d, rightAnswer);
     }
 }

@@ -2,12 +2,12 @@ package quiz.entity;
 
 public class Question {
 
-    private final String question;
-    private final String a;
-    private final String b;
-    private final String c;
-    private final String d;
-    private final String correct;
+    private String question;
+    private String a;
+    private String b;
+    private String c;
+    private String d;
+    private String correct;
 
     public Question(String question, String a, String b, String c, String d, String correct) {
         this.question = question;
