@@ -3,6 +3,7 @@ package quiz.core;
 import quiz.entity.Question;
 import quiz.io.JsonFileReader;
 import quiz.io.JsonFileWriter;
+import quiz.io.Printer;
 import quiz.repository.Repository;
 
 import java.io.BufferedReader;
@@ -21,13 +22,12 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void startTest() throws IOException {
+    public String startTest() throws IOException {
 
         repository = jsonFileReader.readData();
 
         if (repository.getRepository().isEmpty()) {
-            System.out.println(("Question database is empty. Add new questions.") + System.lineSeparator());
-            return;
+            return "Question database is empty. Add new questions." + System.lineSeparator();
         }
 
         int correctAnswers = 0;
@@ -39,18 +39,55 @@ public class ControllerImpl implements Controller {
                 correctAnswers++;
             }
         }
-        Printer.printResult(correctAnswers, repository.getSize());
+        return Printer.printResult(correctAnswers, repository.getSize());
     }
 
     @Override
-    public void addNewQuestion() throws IOException {
+    public String addNewQuestion() throws IOException {
 
         repository = jsonFileReader.readData();
 
         Question question = populateQuestionTemplate();
 
-        repository.addQuestion(repository.getSize() + 1, question);
-        System.out.println("Question successfully added to repository.");
+        boolean freeSlot = false;
+        int slot = 0;
+        for (int i = 1; i <= repository.getSize(); i++) {
+            if (!repository.getRepository().containsKey(i)) {
+                freeSlot = true;
+                slot = i;
+                break;
+            }
+        }
+        if (freeSlot) {
+            repository.addQuestion(slot, question);
+        } else {
+            repository.addQuestion(repository.getSize() + 1, question);
+        }
+
+        return "Question successfully added to repository.";
+    }
+
+    @Override
+    public String removeQuestion() throws IOException {
+
+        repository = jsonFileReader.readData();
+
+        Printer.printAll(repository);
+        System.out.println("Enter the Id number of the question you want to delete: ");
+        String input = reader.readLine();
+        boolean isDigit = Character.isDigit(input.charAt(0));
+
+        while (input.isBlank() || !isDigit) {
+            System.out.println("Invalid input!");
+            input = reader.readLine();
+            isDigit = Character.isDigit(input.charAt(0));
+        }
+        boolean isExist = repository.getRepository().containsKey(Integer.parseInt(input));
+        if (!isExist) {
+            throw new NullPointerException("No element with such Id. Operation canceled!");
+        }
+        repository.removeQuestion(Integer.parseInt(input));
+        return String.format("Question number: %s - successfully deleted", input);
     }
 
     @Override

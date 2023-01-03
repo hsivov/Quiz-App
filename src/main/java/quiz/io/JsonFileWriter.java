@@ -1,6 +1,7 @@
 package quiz.io;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import quiz.repository.Repository;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class JsonFileWriter {
 
     public void writeData() throws IOException {
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String filePath = "src/main/java/quiz/io/quizData.json";
 
         Writer writer = Files.newBufferedWriter(Paths.get(filePath));

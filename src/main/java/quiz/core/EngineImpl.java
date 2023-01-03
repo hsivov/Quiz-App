@@ -1,5 +1,7 @@
 package quiz.core;
 
+import quiz.io.Printer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,39 +20,38 @@ public class EngineImpl implements Engine {
     public void run() {
 
         while (true) {
-            Printer.printMenu();
-            String input;
-
+            String result;
             try {
-                input = reader.readLine();
+                result = processInput();
+                if (result.equals("exit")) {
+                    break;
+                }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                result = e.getMessage();
             }
-
-            switch (input) {
-                case "1":
-                    try {
-                        controller.startTest();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
-                case "2":
-                    try {
-                        controller.addNewQuestion();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
-                case "3":
-                    try {
-                        controller.exit();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return;
-            }
+            System.out.println(result);
         }
     }
 
+    private String processInput() throws IOException {
+        Printer.printMenu();
+        String input = reader.readLine();
+        String result = null;
+
+        switch (input) {
+            case "1":
+                result = controller.startTest();
+                break;
+            case "2":
+                result = controller.addNewQuestion();
+                break;
+            case "3":
+                result = controller.removeQuestion();
+                break;
+            case "4":
+                controller.exit();
+                result = "exit";
+        }
+        return result;
+    }
 }

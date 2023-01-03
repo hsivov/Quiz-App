@@ -3,9 +3,11 @@ package quiz.core;
 import java.io.IOException;
 
 public interface Controller {
-    void startTest() throws IOException;
+    String startTest() throws IOException;
 
-    void addNewQuestion() throws IOException;
+    String addNewQuestion() throws IOException;
+
+    String removeQuestion() throws IOException;
 
     void exit() throws IOException;
 }

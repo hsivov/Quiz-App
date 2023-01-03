@@ -8,6 +8,8 @@ public interface Repository {
 
     void addQuestion(int idNumber, Question question);
 
+    void removeQuestion(int idNumber);
+
     Map<Integer, Question> getRepository();
     int getSize();
 }
